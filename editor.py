@@ -4,24 +4,24 @@ import os
 from subprocess import call
 
 
-EDITOR = os.environ.get('EDITOR','vim')
 
 
 class Editor():
     def __init__(self):
+        self.EDITOR = os.environ.get('EDITOR','vim')
         pass
 
     def open_editor(self, initial_message=b"", ignore_comments=True):
         with tempfile.NamedTemporaryFile(suffix=".tmp") as tf:
             tf.write(initial_message)
             tf.flush()
-            call([EDITOR, tf.name])
+            call([self.EDITOR, tf.name])
             with open(tf.name, 'r') as f:
                 msg = f.read()
 
         return msg
 
-    def parse_args(self, edited_message):
+    def __parse_args(self, edited_message):
         return_args = {}
 
         for line in edited_message.split('\n'):
@@ -48,7 +48,7 @@ class Editor():
             initial_message += footer + b'\n'
 
         edited_message = self.open_editor(initial_message=initial_message)
-        return_args = self.parse_args(edited_message)
+        return_args = self.__parse_args(edited_message)
 
         for key in return_args:
             if key not in args:
