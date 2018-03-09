@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
-import sys, tempfile, os
-from subprocess import call
+from editor import Editor
 
-EDITOR = os.environ.get('EDITOR','vim') #that easy!
+def test1():
+    editor = Editor()
+    message = editor.open_editor(b"This is a test")
+    print(message)
 
-initial_message = "" # if you want to set up the file somehow
+def test2():
+    editor = Editor()
+    args = editor.get_args(['test','test2'], b'# header', b'#footer')
+    for arg in args:
+        print(arg + ": " + args[arg])
 
-with tempfile.NamedTemporaryFile(suffix=".tmp") as tf:
-  tf.write(initial_message)
-  tf.flush()
-  call([EDITOR, tf.name])
-
-  # do the parsing with `tf` using regular File operations.
-  # for instance:
-  tf.seek(0)
-  edited_message = tf.read()
-
-
+if __name__ == '__main__':
+    test2()
