@@ -4,11 +4,9 @@ import os
 from subprocess import call
 
 
-
-
 class Editor():
     def __init__(self):
-        self.EDITOR = os.environ.get('EDITOR','vim')
+        self.EDITOR = os.environ.get('EDITOR', 'vim')
         pass
 
     def open_editor(self, initial_message=b"", ignore_comments=True):
