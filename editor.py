@@ -40,7 +40,11 @@ class Editor():
         if header:
             initial_message += header + b'\n'
 
-        initial_message += str(':\n'.join([arg for arg in args]) + ':\n').encode('utf-8')
+        if type(args) is dict:
+            for k,v in args.items():
+                initial_message += ('%s: %s\n' % (k, v)).encode('utf-8')
+        else:
+            initial_message += str(':\n'.join([arg for arg in args]) + ':\n').encode('utf-8')
 
         if footer:
             initial_message += footer + b'\n'

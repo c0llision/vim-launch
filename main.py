@@ -12,5 +12,12 @@ def test2():
     for arg in args:
         print(arg + ": " + args[arg])
 
+def test3():
+    editor = Editor()
+    args = {'test':'defaultv'}
+    args = editor.get_args(args, b'# header', b'#footer')
+    for arg in args:
+        print(arg + ": " + args[arg])
+
 if __name__ == '__main__':
-    test2()
+    test3()
