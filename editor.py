@@ -25,7 +25,7 @@ class Editor():
         for line in edited_message.split('\n'):
             if ':' not in line:
                 continue
-            if line[0] == b"#":
+            if line.startswith(b"#"):
                 continue
 
             key, value = line.split(':', 1)
@@ -54,9 +54,9 @@ class Editor():
 
         for key in return_args:
             if key not in args:
-                raise Exception('Key not in args')
+                raise Exception('Key not in args: %s' % key)
         for arg in args:
             if arg not in return_args:
-                raise Exception('key missing')
+                raise Exception('key missing: %s' % arg)
 
         return return_args
